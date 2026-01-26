@@ -1,0 +1,17 @@
+[project]
+name = "ksamplerdf"
+description = "Ksampler refiner with 2 samplers"
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/DevDuckFace/KsamplerDF"
+#  Used by Comfy Registry https://registry.comfy.org
+
+[tool.comfy]
+PublisherId = "duckface"
+DisplayName = "KsamplerDF"
+Icon = ""
+includes = [] 
+# "requires-comfyui" = ">=1.0.0"  # ComfyUI version compatibility
+
