@@ -1,0 +1,17 @@
+[project]
+name = "KsamplerDF"
+description = "A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with independent denoise control for each phase."
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/DevDuckFace/KsamplerDF"
+#  Used by Comfy Registry https://registry.comfy.org
+
+[tool.comfy]
+PublisherId = "duckface"
+DisplayName = "KsamplerDF"
+Icon = ""
+includes = [] 
+# "requires-comfyui" = ">=1.0.0"  # ComfyUI version compatibility
+
