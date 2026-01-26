@@ -2,6 +2,9 @@
 
 A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with independent denoise control for each phase.
 
+![screenshot](/Screenshot_3.png)
+
+
 ## Features
 
 - **Split Steps**: Divide total steps between main sampler and refiner sampler
@@ -94,6 +97,7 @@ KsamplerDF/
 
 
 MIT License - Feel free to use and modify as needed.
+
 
 
 
