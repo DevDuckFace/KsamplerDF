@@ -76,7 +76,7 @@ The `denoise_refiner` parameter controls how much the refiner phase affects the 
 ## File Structure
 
 ```
-ksamplerwithrefiner/
+KsamplerDF/
 ├── __init__.py
 ├── nodes.py
 └── README.md
@@ -91,4 +91,5 @@ ksamplerwithrefiner/
 
 
 MIT License - Feel free to use and modify as needed.
+
 
