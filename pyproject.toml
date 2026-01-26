@@ -10,8 +10,8 @@ Repository = "https://github.com/DevDuckFace/KsamplerDF"
 
 [tool.comfy]
 PublisherId = "duckface"
-DisplayName = "KsamplerDF"
+DisplayName = "DuckFace"
 Icon = ""
-includes = [] 
-# "requires-comfyui" = ">=1.0.0"  # ComfyUI version compatibility
+
+
 
