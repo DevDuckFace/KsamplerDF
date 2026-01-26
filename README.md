@@ -20,7 +20,7 @@ A custom ComfyUI node that splits sampling steps between a main sampler and a re
    ```
 3. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/ksamplerwithrefiner.git
+   git clone https://github.com/DevDuckFace/KsamplerDF.git
    ```
 4. Restart ComfyUI
 
@@ -88,5 +88,6 @@ ksamplerwithrefiner/
 - No additional dependencies required
 
 ## License
+
 
 MIT License - Feel free to use and modify as needed.
