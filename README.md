@@ -1,4 +1,4 @@
-# KSampler DF (with Refiner)
+# KSampler DF (with 2 samplers and Refiner)
 
 A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with independent denoise control for each phase.
 
@@ -27,7 +27,7 @@ A custom ComfyUI node that splits sampling steps between a main sampler and a re
 ### Method 2: Manual Installation
 
 1. Download this repository as a ZIP file
-2. Extract the contents to `ComfyUI/custom_nodes/ksamplerwithrefiner/`
+2. Extract the contents to `ComfyUI/custom_nodes/KsamplerDF/`
 3. Restart ComfyUI
 
 ## Usage
@@ -91,3 +91,4 @@ ksamplerwithrefiner/
 
 
 MIT License - Feel free to use and modify as needed.
+
