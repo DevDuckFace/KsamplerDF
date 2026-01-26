@@ -14,7 +14,7 @@ A custom ComfyUI node that splits sampling steps between a main sampler and a re
 ### Method 1: Comfyui Manager (Recommended)
 1- Search KsamplerDF in Comfyui Manager and install
 
-### Method 3: Git Clone 
+### Method 2: Git Clone 
 
 1. Open a terminal/command prompt
 2. Navigate to your ComfyUI custom nodes folder:
@@ -94,6 +94,7 @@ KsamplerDF/
 
 
 MIT License - Feel free to use and modify as needed.
+
 
 
 
