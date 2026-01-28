@@ -117,3 +117,4 @@ Supported models: ESRGAN, RealESRGAN, SwinIR, and other Spandrel-compatible mode
 
 MIT License
 
+
