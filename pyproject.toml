@@ -1,6 +1,6 @@
 [project]
 name = "KsamplerDF"
-description = "A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with independent denoise control for each phase."
+description = "A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with independent denoise control for each phase, with upscalers now"
 version = "1.0.2"
 license = "LICENSE"
 
