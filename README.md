@@ -1,6 +1,6 @@
 # KSampler DF (with Refiner & Upscale)
 
-![screenshot](/Screenshot_3.png)
+![screenshot](/Screenshot_4.png)
 
 A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with latent upscale and optional model-based upscale.
 
@@ -116,3 +116,4 @@ Supported models: ESRGAN, RealESRGAN, SwinIR, and other Spandrel-compatible mode
 ## License
 
 MIT License
+
