@@ -1,104 +1,118 @@
-# KSampler DF (with 2 samplers and Refiner)
-
-A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with independent denoise control for each phase.
+# KSampler DF (with Refiner & Upscale)
 
 ![screenshot](/Screenshot_3.png)
 
+A custom ComfyUI node that splits sampling steps between a main sampler and a refiner sampler, with latent upscale and optional model-based upscale.
+
+## Changelog
+
+### v1.0.2 (2026-01-27)
+- 🔧 **IMPROVED**: Upscale model now selected directly via dropdown (no external node needed)
+- 🔧 **IMPROVED**: VAE is now required for image output
+- ✨ **NEW**: Automatic listing of all upscale models from `models/upscale_models/`
+
+### v1.0.1 (2026-01-27)
+- ✨ **NEW**: Latent upscale between main and refiner phases
+- ✨ **NEW**: Separate CFG control for refiner phase (`cfg_refiner`)
+- ✨ **NEW**: Optional model-based upscale after refinement
+- ✨ **NEW**: Dual output: LATENT and IMAGE
+
+### v1.0.0 (Initial Release)
+- Basic KSampler with refiner functionality
+- Split steps between main and refiner samplers
+- Separate denoise control for each phase
 
 ## Features
 
 - **Split Steps**: Divide total steps between main sampler and refiner sampler
 - **Dual Sampler Support**: Use different samplers/schedulers for main and refiner phases
+- **Independent CFG Control**: Separate CFG values for main and refiner phases
 - **Independent Denoise Control**: Separate denoise parameters for main and refiner phases
-- **Refiner Intensity**: Control how much the refiner affects the final result (0.0 to 1.0)
+- **Latent Upscale**: Optional upscale of latent between main and refiner phases
+- **Model Upscale**: Built-in dropdown to select upscale models (ESRGAN, RealESRGAN, etc.)
 
 ## Installation
 
-### Method 1: Comfyui Manager (Recommended)
-1- Search KsamplerDF in Comfyui Manager and install
+### Method 1: Git Clone (Recommended)
 
-### Method 2: Git Clone 
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/YOUR_USERNAME/ksamplerwithrefiner.git
+```
 
-1. Open a terminal/command prompt
-2. Navigate to your ComfyUI custom nodes folder:
-   ```bash
-   cd ComfyUI/custom_nodes
-   ```
-3. Clone this repository:
-   ```bash
-   git clone https://github.com/DevDuckFace/KsamplerDF.git
-   ```
-4. Restart ComfyUI
+Restart ComfyUI after installation.
 
-### Method 3: Manual Installation
+### Method 2: Manual Installation
 
 1. Download this repository as a ZIP file
-2. Extract the contents to `ComfyUI/custom_nodes/KsamplerDF/`
+2. Extract to `ComfyUI/custom_nodes/ksamplerwithrefiner/`
 3. Restart ComfyUI
 
 ## Usage
 
-Find the node in the **Add Node** menu under: `sampling` → `KSampler DF (with Refiner)`
+Find the node under: `sampling` → `KSampler DF (with Refiner & Upscale)`
 
 ### Parameters
 
+#### Main Sampling
 | Parameter | Description |
 |-----------|-------------|
-| **model** | The model used for denoising |
-| **positive** | Positive conditioning (prompt) |
-| **negative** | Negative conditioning (negative prompt) |
-| **latent_image** | The latent image to denoise |
-| **seed** | Random seed for noise generation |
-| **steps** | Total number of steps (split between main and refiner) |
-| **cfg** | Classifier-Free Guidance scale |
-| **sampler_name** | Sampler algorithm for the main phase |
-| **scheduler** | Scheduler for the main phase |
-| **denoise** | Denoise amount for the main phase (0.0 to 1.0) |
-| **refiner_at_step** | Step at which to switch from main to refiner |
-| **sampler_refiner** | Sampler algorithm for the refiner phase |
-| **scheduler_refiner** | Scheduler for the refiner phase |
-| **denoise_refiner** | Denoise amount for the refiner phase (0.0 to 1.0) |
+| **model** | The diffusion model |
+| **positive/negative** | Conditioning (prompts) |
+| **latent_image** | Input latent |
+| **seed** | Random seed |
+| **steps** | Total steps (main + refiner) |
+| **cfg** | CFG scale for main phase |
+| **sampler_name** | Sampler for main phase |
+| **scheduler** | Scheduler for main phase |
+| **denoise** | Denoise for main phase |
+
+#### Latent Upscale
+| Parameter | Description |
+|-----------|-------------|
+| **latent_upscale_enabled** | Enable/disable |
+| **latent_upscale_method** | nearest-exact, bilinear, area, bicubic, bislerp |
+| **latent_upscale_factor** | Scale factor (e.g., 1.5) |
+
+#### Refiner
+| Parameter | Description |
+|-----------|-------------|
+| **refiner_at_step** | Step to switch to refiner |
+| **sampler_refiner** | Sampler for refiner phase |
+| **scheduler_refiner** | Scheduler for refiner phase |
+| **cfg_refiner** | CFG scale for refiner phase |
+| **denoise_refiner** | Denoise for refiner (0.0-1.0) |
+
+#### Output & Upscale
+| Parameter | Description |
+|-----------|-------------|
+| **vae** | VAE for decoding to image |
+| **upscale_model_name** | Select upscale model or "none" to disable |
+
+### Outputs
+
+| Output | Description |
+|--------|-------------|
+| **LATENT** | Denoised latent |
+| **IMAGE** | Decoded/upscaled image |
 
 ### Example
 
-With these settings:
-- **steps**: 20
-- **refiner_at_step**: 12
+- **steps**: 20, **refiner_at_step**: 12
 
-The node will:
-1. Run **12 steps** with the main sampler/scheduler
-2. Run **8 steps** with the refiner sampler/scheduler
+Result: 12 main steps → (latent upscale) → 8 refiner steps → VAE decode → (model upscale)
 
-### Refiner Denoise Control
+## Upscale Models
 
-The `denoise_refiner` parameter controls how much the refiner phase affects the image:
+Place upscale models in `ComfyUI/models/upscale_models/`. They will appear automatically in the dropdown.
 
-| Value | Effect |
-|-------|--------|
-| `0.0` | Refiner is skipped (only main sampler runs) |
-| `0.5` | Refiner applies 50% denoising |
-| `1.0` | Refiner applies full denoising |
-
-## File Structure
-
-```
-KsamplerDF/
-├── __init__.py
-├── nodes.py
-└── README.md
-```
+Supported models: ESRGAN, RealESRGAN, SwinIR, and other Spandrel-compatible models.
 
 ## Requirements
 
-- ComfyUI (latest version recommended)
-- No additional dependencies required
+- ComfyUI (latest version)
+- No additional dependencies
 
 ## License
 
-
-MIT License - Feel free to use and modify as needed.
-
-
-
-
-
+MIT License
